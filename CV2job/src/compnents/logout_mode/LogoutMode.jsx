@@ -1,26 +1,112 @@
 import React from 'react';
-import './home.css';
+import '../home/home.css';
 
-const Home = () => {
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+const LogoutMode = () => {
+    const navigate = useNavigate();
+
+    const [isLoginOpen, setIsLoginOpen] = useState(false);
+    const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+
+    // Login State
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    // Sign Up State
+    const [signupUsername, setSignupUsername] = useState('');
+    const [signupEmail, setSignupEmail] = useState('');
+    const [signupPassword, setSignupPassword] = useState('');
+
+    // Handlers
+    const handleLoginClick = () => {
+        setIsLoginOpen(true);
+        setIsSignUpOpen(false);
+        setError('');
+    };
+
+    const handleSignUpClick = () => {
+        setIsSignUpOpen(true);
+        setIsLoginOpen(false);
+        setError('');
+    };
+
+    const handleCloseModal = () => {
+        setIsLoginOpen(false);
+        setIsSignUpOpen(false);
+    };
+
+    const handleSignUpSubmit = (e) => {
+        e.preventDefault();
+        if (!signupUsername || !signupEmail || !signupPassword) {
+            setError("All fields are required");
+            return;
+        }
+
+        // Store user in localStorage
+        const newUser = { username: signupUsername, email: signupEmail, password: signupPassword };
+        // We'll store users in an array 'cv2job_users' or simply map by username for O(1) look up.
+        // Let's use a simple key-value for this user: user_{username}
+        localStorage.setItem(`user_${signupUsername}`, JSON.stringify(newUser));
+
+        alert("Sign Up Successful! Please Sign In.");
+        setIsSignUpOpen(false);
+        setIsLoginOpen(true); // Switch to Login
+
+        // Reset form
+        setSignupUsername('');
+        setSignupEmail('');
+        setSignupPassword('');
+    };
+
+    const handleLoginSubmit = (e) => {
+        e.preventDefault();
+
+        // Check Hardcoded
+        if (username === 'UJJWAL_8189' && password === 'UJJWAL_8189') {
+            navigate('/home');
+            return;
+        }
+
+        // Check LocalStorage
+        const storedUserJson = localStorage.getItem(`user_${username}`);
+        if (storedUserJson) {
+            const storedUser = JSON.parse(storedUserJson);
+            if (storedUser.password === password) {
+                navigate('/home');
+                return;
+            }
+        }
+
+        // Failed
+        setError('Please enter correct details or sign up');
+    };
+
     return (
         <div className="home-container">
             <header className="header">
                 <a href="/" className="logo">CV2<span>Job</span></a>
+                <ul className="footer-links" style={{ display: 'flex', gap: '1.5rem', listStyle: 'none', margin: 0, padding: 0 }}>
+                    <li><button onClick={handleLoginClick} style={{ background: 'none', border: '1px solid white', borderRadius: '4px', padding: '0.5rem 1rem', color: 'white', cursor: 'pointer', fontSize: '1rem', fontWeight: 600 }}>Sign In</button></li>
+                    <li><button onClick={handleSignUpClick} style={{ background: 'var(--primary-green)', border: 'none', borderRadius: '4px', padding: '0.5rem 1rem', color: 'black', cursor: 'pointer', fontSize: '1rem', fontWeight: 600 }}>Sign Up</button></li>
+                </ul>
             </header>
 
-            {/* Hero Section */}
+            {/* Hero Section (Custom for Logout Mode) */}
             <section className="hero">
-                <p className="welcome-text">Welcome to CV2Job</p>
+                <p className="welcome-text">Resume Optimization</p>
                 <h1 className="headline">
-                    Upload your resume and get instant LinkedIn job matches
+                    Elevate your job findings with AI power insights
                 </h1>
                 <p className="subtext">
-                    AI analyzes your resume and finds relevant jobs with direct apply links.
-                    Stop searching, start applying.
+                    Optimize your resume, get ATS ready and land your dream job faster.
                 </p>
 
-                <button className="cta-button" onClick={() => alert("Upload feature coming soon!")}>
-                    Upload Resume
+                {/* Goes to Sign In / Get Started */}
+                <button className="cta-button" onClick={handleLoginClick}>
+                    Get Started
                 </button>
             </section>
 
@@ -164,6 +250,88 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* Login Modal */}
+            {isLoginOpen && (
+                <div className="modal-overlay" onClick={handleCloseModal}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="modal-close" onClick={handleCloseModal}>&times;</button>
+                        <h2 className="modal-title">Sign <span>In</span></h2>
+                        <form onSubmit={handleLoginSubmit}>
+                            <div className="form-group">
+                                <input
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="Username"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="password"
+                                    className="form-input"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </div>
+                            {error && <p className="error-message">{error}</p>}
+                            <button type="submit" className="login-submit-btn">Sign In</button>
+                            <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#888' }}>
+                                New here? <button type="button" onClick={handleSignUpClick} style={{ color: 'var(--primary-green)', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>Sign Up</button>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            )}
+
+            {/* Sign Up Modal */}
+            {isSignUpOpen && (
+                <div className="modal-overlay" onClick={handleCloseModal}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="modal-close" onClick={handleCloseModal}>&times;</button>
+                        <h2 className="modal-title">Sign <span>Up</span></h2>
+                        <form onSubmit={handleSignUpSubmit}>
+                            <div className="form-group">
+                                <input
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="Username"
+                                    value={signupUsername}
+                                    onChange={(e) => setSignupUsername(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="email"
+                                    className="form-input"
+                                    placeholder="Email Address"
+                                    value={signupEmail}
+                                    onChange={(e) => setSignupEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="password"
+                                    className="form-input"
+                                    placeholder="Password"
+                                    value={signupPassword}
+                                    onChange={(e) => setSignupPassword(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            {error && <p className="error-message">{error}</p>}
+                            <button type="submit" className="login-submit-btn">Create Account</button>
+                            <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#888' }}>
+                                Already have an account? <button type="button" onClick={handleLoginClick} style={{ color: 'var(--primary-green)', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>Sign In</button>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            )}
+
             {/* Footer */}
             <footer className="footer">
                 <div className="footer-content">
@@ -174,7 +342,7 @@ const Home = () => {
                     <div className="footer-column">
                         <h3>Quick Links</h3>
                         <ul className="footer-links">
-                            <li><a href="#">Upload Resume</a></li>
+                            <li><button onClick={handleLoginClick} style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', font: 'inherit', cursor: 'pointer', textDecoration: 'none' }}>Get Started</button></li>
                             <li><a href="#">Features</a></li>
                             <li><a href="#">Pricing</a></li>
                             <li><a href="#">Blog</a></li>
@@ -199,4 +367,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default LogoutMode;
