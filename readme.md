@@ -2,6 +2,8 @@
 
 **CV2Job** is an intelligent web application designed to bridge the gap between job seekers and their dream roles. By leveraging advanced Generative AI and real-time job data, it analyzes resumes, provides personalized role recommendations, and instantly fetches relevant job listings from top platforms.
 
+Made by **Ujjwal** and **Himanshu**
+
 ---
 
 ## 🌟 Key Features
