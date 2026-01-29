@@ -8,8 +8,6 @@ Made by **Ujjwal** and **Himanshu**
 ### 🔗 **[Live Demo](https://cv-2-job-2t9v.vercel.app/)**
 ---
 
----
-
 ## 🌟 Key Features
 
 *   **Smart Resume Analysis**: Upload your resume (PDF), and our Llama-3 powered AI parses skills, experience, and professional summaries with high accuracy.
@@ -64,8 +62,8 @@ This project was made by **Ujjwal** and **Himanshu**. The development was divide
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/Dexter-2005/CV2JOB.git
-    cd CV2JOB
+    git clone https://github.com/Dexter-2005/CV-2-job.git
+    cd CV-2-job
     ```
 
 2.  **Install dependencies:**
