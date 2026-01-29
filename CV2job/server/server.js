@@ -12,6 +12,9 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Health check route
+app.get('/', (req, res) => res.json({ status: 'CV2Job API is running' }));
+
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Initialize Groq client
