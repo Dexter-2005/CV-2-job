@@ -5,6 +5,10 @@
 Made by **Ujjwal** and **Himanshu**
 
 ---
+### 🔗 **[Live Demo](https://cv-2-job-2t9v.vercel.app/)**
+---
+
+---
 
 ## 🌟 Key Features
 
