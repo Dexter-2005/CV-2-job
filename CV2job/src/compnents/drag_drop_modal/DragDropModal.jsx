@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './DragDropModal.css';
+import API_BASE_URL from '../../apiConfig';
 
 const DragDropModal = ({ onClose, onAnalysisComplete }) => {
     const [isDragActive, setIsDragActive] = useState(false);
@@ -58,7 +59,7 @@ const DragDropModal = ({ onClose, onAnalysisComplete }) => {
         formData.append('resume', file);
 
         try {
-            const response = await fetch('http://localhost:5000/api/analyze-resume', {
+            const response = await fetch(`${API_BASE_URL}/api/analyze-resume`, {
                 method: 'POST',
                 body: formData,
             });
@@ -77,8 +78,8 @@ const DragDropModal = ({ onClose, onAnalysisComplete }) => {
             }
 
         } catch (error) {
-            console.error("Upload error:", error);
-            alert("Error uploading file. Make sure the backend server is running.");
+            console.error("Upload error details:", error);
+            alert(`Error uploading file: ${error.message}\n\nMake sure your backend is running at ${API_BASE_URL}`);
         } finally {
             setIsLoading(false);
         }

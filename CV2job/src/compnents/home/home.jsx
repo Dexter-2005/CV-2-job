@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './home.css';
 import DragDropModal from '../drag_drop_modal/DragDropModal';
+import API_BASE_URL from '../../apiConfig';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -49,7 +50,7 @@ const Home = () => {
         setJobResults(null);
 
         try {
-            const response = await fetch('http://localhost:5000/api/search-jobs', {
+            const response = await fetch(`${API_BASE_URL}/api/search-jobs`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
