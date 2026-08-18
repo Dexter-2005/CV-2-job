@@ -42,19 +42,16 @@ This project was made by **Ujjwal** and **Himanshu**. The development was divide
 **Frontend:**
 *   Implemented the **Home Interface** and responsive Hero section.
 *   Developed the **Drag & Drop Modal** for intuitive resume uploads.
-
-**Backend:**
-*   Setup **core server architecture** and API routing.
-*   Implemented file storage and handling logic for uploaded CVs.
-
-### **[Himanshu (Dexter)](https://github.com/Dexter-2005)**
-**Frontend:**
 *   Developed the **Authentication UI** (Login/Logout modes) and User Dashboard.
 *   Integrated **real-time status updates** and notifications for the user.
 
+
+### **[Himanshu (Dexter)](htts://github.com/Dexter-2005)**
 **Backend:**
 *   Implemented **Authentication Logic** using JWT/Sessions.
 *   Developed the **Resume Parsing Algorithm** and database integration logic.
+*   Setup **core server architecture** and API routing.
+*   Implemented file storage and handling logic for uploaded CVs.
 
 ---
 
