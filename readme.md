@@ -2,7 +2,6 @@
 
 **CV2Job** is an intelligent web application designed to bridge the gap between job seekers and their dream roles. By leveraging advanced Generative AI and real-time job data, it analyzes resumes, provides personalized role recommendations, and instantly fetches relevant job listings from top platforms.
 
-Made by **Ujjwal** and **Himanshu**
 
 ---
 ### 🔗 **[Live Demo](https://cv-2-job-2t9v.vercel.app/)**
@@ -31,27 +30,6 @@ Made by **Ujjwal** and **Himanshu**
 *   **Multer**: Handling file uploads and buffer processing.
 *   **Groq SDK**: Interface for running the Llama 3.3 70B AI model.
 *   **Axios**: Making HTTP requests to external job search APIs.
-
----
-
-## 👥 Contributors & Work Distribution
-
-This project was made by **Ujjwal** and **Himanshu**. The development was divided equally between both contributors, demonstrating expertise in both Frontend and Backend technologies.
-
-### **[Ujjwal](https://github.com/usy8189)**
-**Frontend:**
-*   Implemented the **Home Interface** and responsive Hero section.
-*   Developed the **Drag & Drop Modal** for intuitive resume uploads.
-*   Developed the **Authentication UI** (Login/Logout modes) and User Dashboard.
-*   Integrated **real-time status updates** and notifications for the user.
-
-
-### **[Himanshu (Dexter)](htts://github.com/Dexter-2005)**
-**Backend:**
-*   Implemented **Authentication Logic** using JWT/Sessions.
-*   Developed the **Resume Parsing Algorithm** and database integration logic.
-*   Setup **core server architecture** and API routing.
-*   Implemented file storage and handling logic for uploaded CVs.
 
 ---
 
